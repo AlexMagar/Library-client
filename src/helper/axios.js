@@ -1,17 +1,18 @@
 import axios from 'axios'
 
-const rootAPI = "http://localhost:8000"
+const rootAPI = "httsp://localhost:8000"
 const userAPI = rootAPI + "/api/v1/user"
 
-const postUser = async data =>{
+export const postUser = async data =>{
     try {
         const resp = await axios.post(userAPI, data)
+        console.log(resp)
 
         return resp.data;
     } catch (error) {
         return{
-            status: "error",
-            message: "someting wrong"
+            status: 'error',
+            message: error.message,
         }
     }
 }
