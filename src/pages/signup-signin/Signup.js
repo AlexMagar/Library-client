@@ -27,12 +27,13 @@ const Signup = () => {
 
         if(confirmPasseord !== form.password){
 
-            return TransformStream.error("Password do not match");
+            return toast.error("Password do not match");
 
         }
 
         //call api and send rest obj
         const dataPromise = postUser(rest);
+        console.log(dataPromise)
         toast.promise(dataPromise, {
             pending: "Please wait...",
     });
@@ -97,17 +98,17 @@ const Signup = () => {
     <div>
         <Header />
         <section className='main' >
-            <Form className='m-5 p-5 border shadow-lg'>
+            <Form className='m-5 p-5 border shadow-lg' onSubmit={handleOnSubmit}>
                 <h1 className='text-center'> <BiSolidUserDetail className='f-4'/> Add New Admin</h1>
                 <hr />
                 {
                     inputs.map((item, i) =>(
-                        <CustomInput key={i} {...item}/>
+                        <CustomInput key={i} {...item} onChange={handleOnChange}/>
                     ))
                 }
-                <Form.Group className='d-grid'>
-                    <Button variant='primary' type='submit'>Add New Admin</Button>
-                </Form.Group>
+                <div className="d-grid">
+                <Button variant='primary' type='submit'>Add New Admin</Button>
+                </div>
             </Form>
         </section>
         <Footer />
