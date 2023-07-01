@@ -1,12 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Header } from "../../components/layout/Header";
 import { Footer } from "../../components/layout/Footer";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { BiSolidUserDetail } from "react-icons/bi";
-import { CustomLoginInput } from "../../components/custom-input/CustomLoginInput";
+import { CustomInput } from "../../components/custom-input/CustomInput";
+import { signInAdminAction } from "./userAction.js";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Singnin = () => {
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.userInfo);
+
+
+  const [form, setForm] = useState({}); //data type is an onject
+
+  useEffect(() => {
+    user?._id && navigate("/dashboard");
+  }, [user?._id, navigate]);
 
   const loginInput =[
     {
@@ -26,7 +40,6 @@ const Singnin = () => {
     },
   ]
 
-  const [form, setForm] = useState({});
 
   const handleOnChange = (e) => {
     const {name, value} = e.target;
@@ -39,9 +52,11 @@ const Singnin = () => {
   console.log("Data from Signin form", form);
 
   const handleOnSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); //prevent referece the browser
 
-    console.log(e.target.name)
+    dispatch(signInAdminAction(form));
+
+    console.log(form)
   }
 
   return (
@@ -53,7 +68,7 @@ const Singnin = () => {
             <hr />
             {
               loginInput.map((item, i) => (
-                <CustomLoginInput key={i} {...item} onChange={handleOnChange}/>
+                <CustomInput key={i} {...item} onChange={handleOnChange}/>
               ))
             }
             <div className="d-grid">

@@ -9,7 +9,9 @@ import { toast } from "react-toastify";
 import { postUser } from "../../helper/axios";
 
 const Signup = () => {
-    const [form, setForm] = useState({});
+    const [form, setForm] = useState({
+        role: "student",
+    });
 
     const handleOnChange = (e) =>{
         const {name, value} = e.target;
