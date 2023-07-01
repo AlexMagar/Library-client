@@ -5,15 +5,15 @@ import storage from 'redux-persist/lib/storage' // defaults to localStorage for 
  
 const userPersistConfig = {
     key: "userInfo",
-    storage,
+    storage
 }
 
 const persistedUserReducer = persistReducer(userPersistConfig, userReducer);
 
 const store = configureStore({
     reducer:{
-        userInfo: persistedUserReducer,
-        testUser: userReducer,
+        userInfo: persistedUserReducer, //sync with local storage 
+        testUser: userReducer // for testing purpose
     },
 })
 

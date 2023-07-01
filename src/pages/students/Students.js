@@ -1,8 +1,8 @@
 import React from 'react'
 import { UserLayout } from '../../components/layout/UserLayout'
 
-export const BurrowHistory = () => {
+export const Students = () => {
   return (
-    <UserLayout title="BurrowHistory">Books</UserLayout>
+    <UserLayout title="student">Students</UserLayout>
   )
 }

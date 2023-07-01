@@ -7,8 +7,12 @@ import { CustomInput } from "../../components/custom-input/CustomInput";
 import { BiSolidUserDetail } from "react-icons/bi";
 import { toast } from "react-toastify";
 import { postUser } from "../../helper/axios";
+import { useSelector } from "react-redux";
 
 const Signup = () => {
+
+    const { user } = useSelector((state) => state.userInfo);
+
     const [form, setForm] = useState({
         role: "student",
     });
@@ -101,15 +105,26 @@ const Signup = () => {
         <Header />
         <section className='main' >
             <Form className='m-5 p-5 border shadow-lg' onSubmit={handleOnSubmit}>
-                <h1 className='text-center'> <BiSolidUserDetail className='f-4'/> Add New Admin</h1>
+                <h1 className='text-center'> <BiSolidUserDetail className='f-4'/>Create New Account {user?.role === "admin" && "For Admin"} </h1>
                 <hr />
+                {
+                    user?.role === "admin" && (
+                    <Form.Group className="mb-3">
+                        <Form.Label>Select user type</Form.Label>
+                        <Form.Select onChange={handleOnChange} required name="role">
+                            <option value="">---select---</option>
+                            <option value="admin">Admin</option>
+                            <option value="student">Student</option>
+                        </Form.Select>
+                    </Form.Group>
+                )}
                 {
                     inputs.map((item, i) =>(
                         <CustomInput key={i} {...item} onChange={handleOnChange}/>
                     ))
                 }
                 <div className="d-grid">
-                <Button variant='primary' type='submit'>Add New Admin</Button>
+                <Button variant='primary' type='submit'>Create New Account</Button>
                 </div>
             </Form>
         </section>
