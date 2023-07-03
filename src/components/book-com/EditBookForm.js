@@ -33,16 +33,21 @@ export const EditBookForm = () => {
 
   const handleOnSubmit = (e) =>{
     e.preventDefault();
-    console.log(form);
-    dispatch(updateBookAction(form));
+
+    if(window.confirm(`Are you sure want to update the changes to ${form.title}`)){
+        const isUpdated = dispatch(updateBookAction(form));
+        isUpdated && navigate("/books");
+    }
   }
   
-  const handleOnDelete =  async () =>{
-    if(window.confirm("Are you sure you want to delete this?")){
-        const isDeleted = await dispatch(deleteBookAction(_id));
+  const handleOnDelete = () =>{
+    console.log("Book info: ", form);
+    if(window.confirm(`Are you sure you want to delete this Book? ${form.title}`)){
+        const isDeleted =  dispatch(deleteBookAction(_id));
         isDeleted && navigate("/books");
     }
   }
+
     const inputs = [
         {
             label: "Book title",
