@@ -12,8 +12,21 @@ import { BurrowHistory } from "./pages/burrow-history/BurrowHistory";
 import { Books } from "./pages/books/Books";
 import { Profile } from "./pages/profile/Profile";
 import { Students } from "./pages/students/Students";
+import { NewBookForm } from "./components/book-com/NewBookForm";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchBookAction } from "./pages/books/bookAction";
+import { EditBookForm } from "./components/book-com/EditBookForm";
 
 function App() {
+
+  const dispatch = useDispatch();
+
+  //fetch the book
+  useEffect(() => {
+    dispatch(fetchBookAction());
+  }, [dispatch]);
+
   return (
     <div className="">
       <Routes>
@@ -26,6 +39,8 @@ function App() {
         <Route path="/students" element={<PrivateRoute><Students />  </PrivateRoute> } />
         <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute> } />
         <Route path="/books" element={<PrivateRoute><Books /></PrivateRoute> } />
+        <Route path="/books/new" element={<PrivateRoute> <NewBookForm /> </PrivateRoute> } />
+        <Route path="/books/edit/:_id" element={<PrivateRoute> <EditBookForm /> </PrivateRoute> } />
         <Route path="/burrow-history" element={<PrivateRoute><BurrowHistory /></PrivateRoute> } />
       </Routes>
       <ToastContainer />

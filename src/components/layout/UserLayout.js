@@ -5,7 +5,7 @@ import { Footer } from './Footer'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-export const UserLayout = ({Children, title}) => {
+export const UserLayout = ({children, title}) => { //children is the keyword and its must be lowercase
     const {user} = useSelector((state) => state.userInfo);
   return (
     <div className='d-flex'>
@@ -44,7 +44,7 @@ export const UserLayout = ({Children, title}) => {
             <Container className='main'>
                 <h1 className='mt-2'>{title}</h1>
                 <hr />
-                {Children}
+                {children}
             </Container>
             <Footer />
         </div>

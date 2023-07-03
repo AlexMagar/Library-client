@@ -29,13 +29,14 @@ const Signup = () => {
     const handleOnSubmit = async (e) =>{
         e.preventDefault();
 
-        const {confirmPasseord, ...rest} = form;
+        const {confirmPassord, ...rest} = form;
 
-        if(confirmPasseord !== form.password){
+        if(confirmPassord !== form.password){
 
             return toast.error("Password do not match");
 
         }
+        console.log(confirmPassord, form.password);
 
         //call api and send rest obj
         const dataPromise = postUser(rest);
