@@ -63,7 +63,7 @@ export const fetchBooks = async (obj) =>{
 
 export const updateBooks = async (obj) =>{
     try {
-        const {data} = await axios.put(bookAPI );
+        const {data} = await axios.put(bookAPI, obj );
 
         return data;
     } catch (error) {
