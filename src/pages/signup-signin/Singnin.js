@@ -13,7 +13,7 @@ const Singnin = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.userInfo);
+  const { user } = useSelector((state) => state.userInfo); //get the user info
 
 
   const [form, setForm] = useState({}); //data type is an onject

@@ -12,6 +12,7 @@ import { persistor } from "../../store";
 
 export const Header = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate("/")
   const {user} = useSelector((state) => state.userInfo);
 
   const handleOnSignOut = () =>{
@@ -21,6 +22,7 @@ export const Header = () => {
     });
     //remove user for the redux
     dispatch(setUser({}));
+    navigate("/")
   };
   return (
     <div>
@@ -34,7 +36,7 @@ export const Header = () => {
                     <>
                     <Link className="nav-link" to="/"><AiFillHome className='fs-3'/> Home</Link>
                     <Link className="nav-link" to="/dashboard"> <AiFillDashboard className='fs-3'/> Dashboard</Link>
-                  <Link className="nav-link" to="#link"> <FaSignOutAlt className='fs-3'/> Sign out</Link>
+                  <Link className="nav-link" to="/"> <FaSignOutAlt className='fs-3' onClick={handleOnSignOut}/> Sign out</Link>
                     </>
                   ) :(
                     <>
