@@ -4,9 +4,12 @@ import { CustomInput } from '../custom-input/CustomInput'
 import { useDispatch, useSelector } from "react-redux";
 import { UserLayout } from '../layout/UserLayout';
 import { postBookAction } from '../../pages/books/bookAction';
+import { useNavigate } from 'react-router-dom';
 
 export const NewBookForm = () => {
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {user} = useSelector((state) => state.userInfo); //userInfo comes from store
   const [form, setForm] = useState({})
 
@@ -21,8 +24,10 @@ export const NewBookForm = () => {
 
   const handleOnSubmit = (e) =>{
     e.preventDefault();
-    console.log(form);
-    dispatch(postBookAction(form));
+    if(window.confirm(`Do you want to add this ${form.title} Book to DB`)){
+        const isAdded = dispatch(postBookAction(form));
+        isAdded && navigate("/books");
+    }
   }
 
     const inputs = [
