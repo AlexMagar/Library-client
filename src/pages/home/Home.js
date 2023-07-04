@@ -3,6 +3,7 @@ import { Header } from '../../components/layout/Header'
 import { Footer } from '../../components/layout/Footer'
 import { useSelector } from 'react-redux'
 import { CustomCard } from '../../components/custom-card/CustomCard'
+import { CustomCarousel } from '../../components/carousel/CustomCarousel'
 
 const Home = () => {
 
@@ -13,13 +14,11 @@ const Home = () => {
     <div>
       <Header />
       <section className='main'>
-        <div className='hero'>
-          Slider
-        </div>
+        <CustomCarousel />
         <div className="book-list">
           {
             books.map((item) => (
-              <CustomCard key={item._id}{...item}/>
+              <div>{item.title}</div>
             ))
           }
         </div>
