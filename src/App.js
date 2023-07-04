@@ -30,11 +30,12 @@ function App() {
   return (
     <div className="">
       <Routes>
+        {/* Public routes */}
         <Route path="/" element={ <Home />} />
         <Route path="/login" element={ <Singnin />} />
+        <Route path="/new-admin" element={<Signup /> } />
 
         {/* // private routes? */}
-        <Route path="/new-admin" element={<Signup /> } />
         <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute> } />
         <Route path="/students" element={<PrivateRoute><Students />  </PrivateRoute> } />
         <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute> } />
