@@ -12,3 +12,11 @@
   margin-bottom: 1rem;
   font-weight: bold;
 }
+
+.carousel {
+  height: 60vh;
+}
+
+.carousel img{
+  height: 60vh;
+}
