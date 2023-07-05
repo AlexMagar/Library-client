@@ -18,7 +18,7 @@ const Home = () => {
         <div className="book-list">
           {
             books.map((item) => (
-              <div>{item.title}</div>
+              <CustomCard key={item._id} {...item}/>
             ))
           }
         </div>
