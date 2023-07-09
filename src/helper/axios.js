@@ -2,9 +2,21 @@ import axios from 'axios'
 
 const rootAPI = "http://localhost:8000"
 const userAPI = rootAPI + "/api/v1/user"
-const bookAPI = rootAPI + "/api/v1/book"
+const bookAPI = rootAPI + "/api/v1/books"
+const burrowAPI = rootAPI + "/api/v1/burrow"
 
-
+const getUserIdFromLocalStorage = () =>{
+    console.log("step 4")
+    const str = localStorage.getItem("persist:userInfo")
+    if(str){
+        const userInfo = JSON.parse(str)
+        if(userInfo.user){
+            const user = JSON.parse(userInfo.user)
+            return user?._id
+        }
+    }
+    return null;
+}
 // ======= user =======
 export const postUser = async (userData) =>{
     try {
@@ -47,7 +59,6 @@ export const postBook = async (obj) =>{
     }
 }
 
-
 export const fetchBooks = async (obj) =>{
     try {
         const {data} = await axios.get(bookAPI );
@@ -77,6 +88,39 @@ export const updateBooks = async (obj) =>{
 export const deleteBooks = async (_id) =>{
     try {
         const {data} = await axios.delete(bookAPI + "/" + _id);
+        headers:{
+            Authorization: getUserIdFromLocalStorage();
+        }
+        return data;
+    } catch (error) {
+        return{
+            status: 'error',
+            message: error.message,
+        }
+    }
+}
+
+// ========= Burrow =========
+export const postBurrow = async (obj) =>{
+    try {
+        const {data} = await axios.post(burrowAPI, obj);
+
+        return data;
+    } catch (error) {
+        return{
+            status: 'error',
+            message: error.message,
+        }
+    }
+}
+
+export const fetchBurrow = async () =>{
+    try {
+        const {data} = await axios.get(burrowAPI, {
+            headers: {
+                Authorization: getUserIdFromLocalStorage(),
+            }
+        });
 
         return data;
     } catch (error) {

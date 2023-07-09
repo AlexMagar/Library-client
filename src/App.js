@@ -17,6 +17,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchBookAction } from "./pages/books/bookAction";
 import { EditBookForm } from "./components/book-com/EditBookForm";
+import BookLanding from "./pages/books/BookLanding";
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
         <Route path="/" element={ <Home />} />
         <Route path="/login" element={ <Singnin />} />
         <Route path="/new-admin" element={<Signup /> } />
+        <Route path="/book/:_id" element={<BookLanding /> } />
 
         {/* // private routes? */}
         <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute> } />
