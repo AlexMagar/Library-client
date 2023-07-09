@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './pages/signup-signin/userSlice';
 import bookReducer from './pages/books/bookSlice'
+import burrowReducer from "./pages/burrow-history/burrowSlice";
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
  
@@ -16,6 +17,7 @@ const store = configureStore({
         userInfo: persistedUserReducer, //sync with local storage 
         // testUser: userReducer, // for testing purpose
         bookInfo: bookReducer,
+        burrowInfo: burrowReducer,
     },
 })
 
