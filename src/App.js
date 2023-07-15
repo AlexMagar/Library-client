@@ -26,7 +26,10 @@ function App() {
   //fetch the book
   useEffect(() => {
     dispatch(fetchBookAction());
+    dispatch(fetchReviewAction());
   }, [dispatch]);
+
+  //also have to fetch the burrow book
 
   return (
     <div className="">

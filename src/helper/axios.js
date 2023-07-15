@@ -4,6 +4,7 @@ const rootAPI = "http://localhost:8000"
 const userAPI = rootAPI + "/api/v1/user"
 const bookAPI = rootAPI + "/api/v1/books"
 const burrowAPI = rootAPI + "/api/v1/burrow"
+const reviewAPI = rootAPI + "./api/v1/review"
 
 const getUserIdFromLocalStorage = () =>{
     console.log("step 4")
@@ -43,12 +44,16 @@ export const loginUser = async (userData) =>{
             message: error.message,
         };
     }
-};
+}
 
 // ========= Book =========
 export const postBook = async (obj) =>{
     try {
-        const {data} = await axios.post(bookAPI, obj);
+        const {data} = await axios.post(bookAPI, obj,{
+            headers: {
+                Authorization: getUserIdFromLocalStorage(),
+            }
+        });
 
         return data;
     } catch (error) {
@@ -59,7 +64,7 @@ export const postBook = async (obj) =>{
     }
 }
 
-export const fetchBooks = async (obj) =>{
+export const fetchBooks = async () =>{
     try {
         const {data} = await axios.get(bookAPI );
 
@@ -87,10 +92,11 @@ export const updateBooks = async (obj) =>{
 
 export const deleteBooks = async (_id) =>{
     try {
-        const {data} = await axios.delete(bookAPI + "/" + _id);
-        headers:{
-            Authorization: getUserIdFromLocalStorage();
-        }
+        const {data} = await axios.delete(bookAPI + "/" + _id, {
+            headers: {
+                Authorization: getUserIdFromLocalStorage(),
+            }
+        });
         return data;
     } catch (error) {
         return{
@@ -103,7 +109,11 @@ export const deleteBooks = async (_id) =>{
 // ========= Burrow =========
 export const postBurrow = async (obj) =>{
     try {
-        const {data} = await axios.post(burrowAPI, obj);
+        const {data} = await axios.post(burrowAPI, obj, {
+            headers: {
+                Authorization: getUserIdFromLocalStorage(),
+            }
+        });
 
         return data;
     } catch (error) {
@@ -121,6 +131,56 @@ export const fetchBurrow = async () =>{
                 Authorization: getUserIdFromLocalStorage(),
             }
         });
+
+        return data;
+    } catch (error) {
+        return{
+            status: 'error',
+            message: error.message,
+        }
+    }
+}
+
+export const returnBurrow = async (obj) => {
+    try {
+      const { data } = await axios.put(burrowAPI, obj, {
+        headers: {
+          Authorization: getUserIdFromLocalStorage(),
+        },
+      });
+  
+      return data;
+    } catch (error) {
+      return {
+        status: "error",
+        message: error.message,
+      };
+    }
+  };
+
+
+
+// ============ Review =========
+export const postReview = async (obj) =>{
+    try {
+        const {data} = await axios.post(reviewAPI, obj, {
+            headers: {
+                Authorization: getUserIdFromLocalStorage(),
+            }
+        });
+
+        return data;
+    } catch (error) {
+        return{
+            status: 'error',
+            message: error.message,
+        }
+    }
+}
+
+export const getReviews = async () =>{
+    try {
+        const {data} = await axios.get(reviewAPI, obj);
 
         return data;
     } catch (error) {
