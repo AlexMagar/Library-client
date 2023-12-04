@@ -1,9 +1,9 @@
 import { toast } from "react-toastify";
 import { fetchBookAction } from "../books/bookAction";
-import { postBurrow, fetchBurrow } from "../../helper/axios";
+import { postBurrow, fetchBurrow, returnBurrow } from "../../helper/axios";
 import { setBurrows } from "./burrowSlice";
 
-export const addBurrowAction = obj => async dispatch =>{
+export const addBurrowAction = (obj) => async (dispatch) =>{
     const {status, message} = await postBurrow(obj);
 
     toast[status](message)
@@ -14,7 +14,7 @@ export const addBurrowAction = obj => async dispatch =>{
     dispatch(fetchBookAction());
     }
 }
-export const fetchBurrowAction = () => async dispatch =>{
+export const fetchBurrowAction = () => async (dispatch) =>{
     const {status, burrowHistory} = await fetchBurrow();
 
     // toast[status](message)
@@ -24,3 +24,16 @@ export const fetchBurrowAction = () => async dispatch =>{
     dispatch(setBurrows(burrowHistory));
     }
 }
+
+export const returnBurrowAction = (obj) => async (dispatch) => {
+    const { status, message } = await returnBurrow(obj);
+  
+    toast[status](message);
+  
+    if (status === "success") {
+      //fetch user burrow
+  
+      dispatch(fetchBurrowAction());
+      dispatch(fetchBookAction());
+    }
+  };
